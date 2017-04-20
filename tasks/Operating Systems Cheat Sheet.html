@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<!-- saved from url=(0203)https://www.hdm-stuttgart.de/studenten/stundenplan/pers_stundenplan/stundenplanfunktionen/skripte/skript_download/5211592/Exercises/b_cheatsheet.html?vorlid=5211592&edvnr=113225a&vorlname=Betriebssysteme -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-15">
+  
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta name="author" content="Stephan Soller">
+  <title>Operating Systems Cheat Sheet</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #f8f8f8; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+pre, code { background-color: #f8f8f8; }
+code > span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code > span.dt { color: #204a87; } /* DataType */
+code > span.dv { color: #0000cf; } /* DecVal */
+code > span.bn { color: #0000cf; } /* BaseN */
+code > span.fl { color: #0000cf; } /* Float */
+code > span.ch { color: #4e9a06; } /* Char */
+code > span.st { color: #4e9a06; } /* String */
+code > span.co { color: #8f5902; font-style: italic; } /* Comment */
+code > span.ot { color: #8f5902; } /* Other */
+code > span.al { color: #ef2929; } /* Alert */
+code > span.fu { color: #000000; } /* Function */
+code > span.er { color: #a40000; font-weight: bold; } /* Error */
+code > span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #000000; } /* Constant */
+code > span.sc { color: #000000; } /* SpecialChar */
+code > span.vs { color: #4e9a06; } /* VerbatimString */
+code > span.ss { color: #4e9a06; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #000000; } /* Variable */
+code > span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code > span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code > span.ex { } /* Extension */
+code > span.at { color: #c4a000; } /* Attribute */
+code > span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code > span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header>
+<h1 class="title">Operating Systems Cheat Sheet</h1>
+<h2 class="author">Stephan Soller</h2>
+<h3 class="date">Summer Semester 2017</h3>
+</header>
+<section id="compile-a-program" class="level1">
+<h1>Compile a Program</h1>
+<p>Compile c files:</p>
+<pre><code><span class="kw">gcc</span> -std=c99 -Wall -o <em>outfile</em> <em>infile</em></code></pre>
+<p>Compile with strict settings (treat all warnings as errors):</p>
+<pre><code><span class="kw">gcc</span> -std=c99 -Wall -Werror -o <em>outfile</em> <em>infile</em></code></pre>
+</section>
+<section id="input-and-output" class="level1">
+<h1>Input and Output</h1>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="dt">int</span> foo = <span class="dv">42</span>;
+printf(<span class="st">"enter a number: "</span>);
+scanf(<span class="st">"%d"</span>, &amp;foo);
+printf(<span class="st">"foo: %d</span><span class="ch">\n</span><span class="st">"</span>, foo);</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>in printf/scanf</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>int</td>
+<td>%d</td>
+</tr>
+<tr class="even">
+<td>double</td>
+<td>%lf</td>
+</tr>
+<tr class="odd">
+<td>char</td>
+<td>%c</td>
+</tr>
+<tr class="even">
+<td>char*</td>
+<td>%s</td>
+</tr>
+<tr class="odd">
+<td>pointer of any type</td>
+<td>%p</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="flow-control" class="level1">
+<h1>Flow Control</h1>
+<pre><code><span class="kw">if</span>(<em>condition1</em>) {
+    <span class="co">// executed when condition1 is true</span>
+} <span class="kw">else</span> <span class="kw">if</span>(<em>condition2</em>) {
+    <span class="co">// executed when condition2 is true</span>
+} <span class="kw">else</span> {
+    <span class="co">// executed when both are false</span>
+}</code></pre>
+<pre><code><span class="kw">while</span>(<em>condition</em>) {
+    <span class="co">// repeated while condition is true</span>
+}</code></pre>
+<pre><code><span class="kw">for</span>(<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; <em>x</em>; i++) {
+    <span class="co">// repeated x times</span>
+}</code></pre>
+<p>Use <code><span class="kw">break</span>;</code> to exit a while or for loop immediately.</p>
+<style>
+    /* main layout and basic typography */
+    html, body { margin: 0; padding: 0; }
+    body { font-size: 14px; font-family: arial, helvetica, sans-serif; }
+
+    h1 { font-size: 160%; font-weight: normal; }
+    section > h1, h2, h3 { font-size: 130%; font-weight: normal; }
+
+    /* page title and date */
+    body > header { width: 100%; margin: 1em; padding: 0; }
+    body > header > * { display: inline-block; margin: 0 1em 0 0; padding: 0; }
+    body > header > h1 { font-size: 1.8em; }
+    body > header > h2.author { display: none; }
+    body > header > h3 { font-size: 1.3em; }
+
+    /* tile view */
+    body { display: flex; flex-wrap: wrap; }
+    body > section { position: relative; flex-grow: 1; page-break-inside: avoid;
+        margin: 0.75em 1em; padding: 1em; box-sizing: border-box; border-radius: 1px 1px; }
+    body > section > *:first-child { margin-top: 0; }
+    body > section > *:last-child { margin-top: 0; }
+    body > section { box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.75 )}
+    body > section:hover { box-shadow: 0 1px 5px 1px rgba(0,0,0,0.75); }
+    section p, section table, section pre { margin: 0.75em 0; padding: 0; }
+    section > p { margin: 0.75em 0 0.25em 0; padding: 0; }
+    section > table { table-layout: fixed; }
+    section > table td, section > table th { white-space: pre; padding: 0.125em 0.25em; }
+
+    /* colors of the tiles */
+    body { background-color: ghostwhite; }
+    body > section:nth-of-type(1) { background-color: lightcyan; }
+    body > section:nth-of-type(2) { background-color: lightcoral; }
+    body > section:nth-of-type(3) { background-color: lightblue; }
+    body > section:nth-of-type(4) { background-color: lightgoldenrodyellow; }
+    body > section:nth-of-type(5) { background-color: lightgreen; }
+    body > section:nth-of-type(6) { background-color: lightpink; }
+    body > section:nth-of-type(7) { background-color: lightsalmon; }
+    body > section:nth-of-type(8) { background-color: lightseagreen; }
+    body > section:nth-of-type(9) { background-color: lightskyblue; }
+    body > section:nth-of-type(10) { background-color: lightcyan; }
+    body > section:nth-of-type(11) { background-color: lightcoral; }
+    body > section:nth-of-type(12) { background-color: lightblue; }
+    body > section:nth-of-type(13) { background-color: lightgoldenrodyellow; }
+    body > section:nth-of-type(14) { background-color: lightgreen; }
+    body > section:nth-of-type(15) { background-color: lightpink; }
+
+    /* source code */
+    code { padding: 0.125em 0.25em; background-color: rgba(255,255,255,0.5); }
+    pre > code { display: block; padding: 0.5em;  }
+
+    code > em { color: #008; }
+
+    /* tables */
+    table, th, tr, td { border-collapse: collapse; }
+    th, td{ height: 1.5em; border-bottom: 1px solid rgba(255,255,255,0.5); vertical-align: bottom;  }
+    th:nth-of-type(odd), td:nth-of-type(odd) { width: 8em;  }
+</style>
+</section>
+
+
+</body></html>
