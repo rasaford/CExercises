@@ -1,0 +1,26 @@
+HTTP/1.1 200 OK
+Date: Thu, 11 May 2017 09:46:44 GMT
+Server: Apache/2.4.10 (Debian)
+Last-Modified: Sun, 13 Nov 2016 18:41:35 GMT
+ETag: "fd-54133129f7960"
+Accept-Ranges: bytes
+Content-Length: 253
+Vary: Accept-Encoding
+Connection: close
+Content-Type: text/html
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Serving a file</title>
+</head>
+<body>
+
+<h1>Serving a file</h1>
+
+<p>This is the webserver in charge of arkanis.de.
+<p>Have a nice day requesting anything you need. Good day.
+ 
+</body>
+</html>
