@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<!-- saved from url=(0203)https://www.hdm-stuttgart.de/studenten/stundenplan/pers_stundenplan/stundenplanfunktionen/skripte/skript_download/5211592/Exercises/b_cheatsheet.html?vorlid=5211592&edvnr=113225a&vorlname=Betriebssysteme -->
+<!-- saved from url=(0203)https://www.hdm-stuttgart.de/studenten/stundenplan/pers_stundenplan/stundenplanfunktionen/skripte/skript_download/5211592/Exercises/g_cheatsheet.html?vorlid=5211592&edvnr=113225a&vorlname=Betriebssysteme -->
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-15">
   
   <meta name="generator" content="pandoc">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <meta name="author" content="Stephan Soller">
+  <meta name="author" content="Benjamin Binder">
   <title>Operating Systems Cheat Sheet</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
@@ -52,6 +53,7 @@ code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Inf
 <header>
 <h1 class="title">Operating Systems Cheat Sheet</h1>
 <h2 class="author">Stephan Soller</h2>
+<h2 class="author">Benjamin Binder</h2>
 <h3 class="date">Summer Semester 2017</h3>
 </header>
 <section id="compile-a-program" class="level1">
@@ -76,20 +78,20 @@ printf(<span class="st">"foo: %d</span><span class="ch">\n</span><span class="st
 </thead>
 <tbody>
 <tr class="odd">
-<td>int</td>
-<td>%d</td>
-</tr>
-<tr class="even">
-<td>double</td>
-<td>%lf</td>
-</tr>
-<tr class="odd">
 <td>char</td>
 <td>%c</td>
 </tr>
 <tr class="even">
 <td>char*</td>
 <td>%s</td>
+</tr>
+<tr class="odd">
+<td>int</td>
+<td>%d</td>
+</tr>
+<tr class="even">
+<td>double</td>
+<td>%lf</td>
 </tr>
 <tr class="odd">
 <td>pointer of any type</td>
@@ -114,6 +116,211 @@ printf(<span class="st">"foo: %d</span><span class="ch">\n</span><span class="st
     <span class="co">// repeated x times</span>
 }</code></pre>
 <p>Use <code><span class="kw">break</span>;</code> to exit a while or for loop immediately.</p>
+</section>
+<section id="memory-allocation" class="level1">
+<h1>Memory Allocation</h1>
+<p>Allocate a block of memory</p>
+<pre><code><span class="dt">void</span> *ptr = malloc(<em>numbytes</em>);</code></pre>
+<p>Overwrite a block of memory with zeros</p>
+<pre><code>memset(ptr, <span class="dv">0</span>, <em>numbytes</em>);</code></pre>
+<p>Resize a memory block</p>
+<pre><code>ptr = realloc(ptr, <em>newsize</em>);</code></pre>
+<p>Free a block of memory</p>
+<pre><code>free(ptr);</code></pre>
+</section>
+<section id="pointers" class="level1">
+<h1>Pointers</h1>
+<p>Define pointer, set pointer target, set pointee</p>
+<pre><code><em>type</em> *ptr = NULL;
+ptr = &amp;<em>target</em>;
+*ptr = <em>target_value</em>;</code></pre>
+<p>Define pointer to struct, set pointer target, set member of struct pointed to</p>
+<pre><code><span class="kw">struct</span> foo *ptr = NULL;
+ptr = &amp;<em>target</em>;
+(*ptr).a = <em>target_member_value</em>;
+ptr-&gt;a = <em>target_member_value</em>;</code></pre>
+</section>
+<section id="structures" class="level1">
+<h1>Structures</h1>
+<p>Define a structure:</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="kw">struct</span> foo {
+    <span class="dt">int</span> a;
+    <span class="dt">int</span> b;
+};</code></pre></div>
+<p>Create a variable of that struct:</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="kw">struct</span> foo bar;</code></pre></div>
+<p>Access struct members:</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">bar.a;</code></pre></div>
+</section>
+<section id="arrays" class="level1">
+<h1>Arrays</h1>
+<p>Define an array with local memory</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="dt">int</span> array[<span class="dv">3</span>];
+<span class="dt">int</span> array[<span class="dv">3</span>] = {<span class="dv">0</span>, <span class="dv">8</span>, <span class="dv">15</span>};
+<span class="dt">int</span> array[] = {<span class="dv">0</span>, <span class="dv">8</span>, <span class="dv">15</span>};</code></pre></div>
+<p>Define array with dynamic length</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="dt">int</span> array_len = <span class="dv">3</span>;
+<span class="dt">int</span> *array = malloc(array_len * <span class="kw">sizeof</span>(<span class="dt">int</span>));
+<span class="co">// do something with array</span>
+free(array);</code></pre></div>
+<p>Iterate over array elements</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="kw">for</span>(<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; <span class="dv">3</span>; i++) {
+    printf(<span class="st">"%d</span><span class="ch">\n</span><span class="st">"</span>, array[i]);
+}</code></pre></div>
+</section>
+<section id="strings" class="level1">
+<h1>Strings</h1>
+<p>Define a string</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="dt">char</span> *string;</code></pre></div>
+<p>Reading a string from the command line</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="dt">char</span>* str = NULL;
+scanf(<span class="st">"%ms"</span>, &amp;str);
+<span class="co">// do something with str</span>
+free(str);</code></pre></div>
+<p>Iterate over all characters of a string</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="kw">for</span>(<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; strlen(string); i++) {
+    <span class="dt">char</span> character = string[i];
+    <span class="co">// do something with the character</span>
+}</code></pre></div>
+</section>
+<section id="functions" class="level1">
+<h1>Functions</h1>
+<p>Declare a function without return value</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="dt">void</span> funcname(<span class="dt">int</span> param1, <span class="dt">int</span> param2 ) {
+    <span class="co">// do some stuff</span>
+    <span class="kw">return</span>;
+}</code></pre></div>
+<p>Declare a function with return value</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="dt">int</span> funcname(<span class="dt">int</span> param1, <span class="dt">int</span> param2 ) {
+    <span class="co">// do some stuff</span>
+    <span class="kw">return</span> <span class="dv">42</span>;
+}</code></pre></div>
+<p>Call functions without saving any return value</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">funcname(<span class="dv">42</span>, <span class="dv">17</span>);</code></pre></div>
+<p>Call functions and save its return value</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="dt">int</span> value;
+value = funcname(<span class="dv">42</span>, <span class="dv">17</span>);</code></pre></div>
+<p>A function can only be called, if it was declared above the call. Declare functions above the main function. Functions cannot be overloaded.</p>
+</section>
+<section id="file-io" class="level1">
+<h1>File I/O</h1>
+<p>Open and close a file</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="dt">int</span> file_descriptor = <span class="dv">0</span>;
+file_descriptor = open(<span class="st">"path_to_file"</span>, FLAGS);
+<span class="co">// Do something with the file</span>
+close(file_descriptor);</code></pre></div>
+<p>Always use relative paths (starting with a <code><span class="kw">.</span></code>) over absolute paths.</p>
+<p>Read a maximum amount of n (512) bytes from a file Write only as much bytes to a file as has been read before</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="dt">int</span> n_bytes_to_read      = <span class="dv">512</span>;
+<span class="dt">int</span> bytes_actually_read  = <span class="dv">0</span>;
+<span class="dt">int</span> bytes_actually_wrote = <span class="dv">0</span>;
+<span class="dt">char</span> buffer[n_bytes_to_read];
+
+bytes_actually_read = read(file_descriptor, buffer, n_bytes_to_read);
+bytes_actually_wrote = write(file_descriptor, buffer, bytes_actually_read);</code></pre></div>
+<p>Standard file descriptors</p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 58%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Descriptor symbol</th>
+<th>Descriptor value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>STDIN_FILENO</td>
+<td>0</td>
+<td>Standard input channel to the program. Usually the command line</td>
+</tr>
+<tr class="even">
+<td>STDOUT_FILENO</td>
+<td>1</td>
+<td>Standard output channel of the program. Usually the command line</td>
+</tr>
+<tr class="odd">
+<td>STDERR_FILENO</td>
+<td>2</td>
+<td>Standard error channel. Usually the command line.</td>
+</tr>
+</tbody>
+</table>
+<p>Useful open-flags</p>
+<table>
+<colgroup>
+<col style="width: 24%">
+<col style="width: 75%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Flag</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>O_RDONLY</td>
+<td>Open a file read only</td>
+</tr>
+<tr class="even">
+<td>O_WRONLY</td>
+<td>Open a file write only</td>
+</tr>
+<tr class="odd">
+<td>O_RDWR</td>
+<td>Open a file both for reading and writing</td>
+</tr>
+<tr class="even">
+<td>O_TRUNC</td>
+<td>If the file already contains content, this content will be deleted before writing</td>
+</tr>
+<tr class="odd">
+<td>O_CREATE</td>
+<td>Create the file if it doesn't exist yet. Needs a third parameter in the open-call.</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Use 00660 as third parameter to set read-write-permissions to your user and group.</td>
+</tr>
+</tbody>
+</table>
+<p>Combine multiple flags</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">open(<span class="st">"path_to_file"</span>, FLAG1 | FLAG2 | FLAG3)</code></pre></div>
+</section>
+<section id="graphical-user-interfaces" class="level1">
+<h1>Graphical User Interfaces</h1>
+<p>IUP project page and documentation: <a href="http://webserver2.tecgraf.puc-rio.br/iup/">IUP Portable User Interface</a></p>
+<p>Compile a GUI program:</p>
+<pre class="shell"><code>gcc -Wall -std=c99 hello_gui.c -o hello_gui gui.a $(ar -p gui.a LDLIBS)</code></pre>
+<p>Create a text field (docs: Controls → IupText)</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">Ihandle* text_field = IupText(NULL);</code></pre></div>
+<p>Create a button (docs: Controls → IupButton)</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">Ihandle* button = IupButton(<span class="st">"press me!"</span>, NULL);</code></pre></div>
+<p>Create a horizontal box (NULL has to be at the end):</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">Ihandle* hbox = IupHbox(child_a, child_b, ..., NULL);</code></pre></div>
+</section>
+<section id="gui-attributes" class="level1">
+<h1>GUI attributes</h1>
+<p>Set an attribute to a static value (a string literal):</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">IupSetAttribute(text_field, <span class="st">"MULTILINE"</span>, <span class="st">"YES"</span>);</code></pre></div>
+<p>Setting an attribute to a dynamic value (IUP will copy the string and we can free the original):</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">IupSetStr(text_field, <span class="st">"VALUE"</span>, msg_str);
+IupSetStrf(text_field, <span class="st">"VALUE"</span>, <span class="st">"message: %s"</span>, msg_str);</code></pre></div>
+</section>
+<section id="gui-callbacks" class="level1">
+<h1>GUI callbacks</h1>
+<p>Define a function that is called back:</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="dt">int</span> button_action_cb(Ihandle* self) {
+    <span class="co">// executed when button is pressed</span>
+}</code></pre></div>
+<p>Tell a button to execute the callback function when pressed:</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">IupSetCallback(button, <span class="st">"ACTION"</span>, button_action_cb);</code></pre></div>
+<p>Other events for which you can add callbacks (e.g. K_ANY): <a href="http://webserver2.tecgraf.puc-rio.br/iup/">Documentation</a> → Events and Callbacks → Common</p>
 <style>
     /* main layout and basic typography */
     html, body { margin: 0; padding: 0; }
