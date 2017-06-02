@@ -1,6 +1,11 @@
+#define _GNU_SOURCE
 #include <stdio.h>
 #include "gui.h"
-#include<string.h>
+#include "network_helper_functions.h"
+#include <string.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/socket.h>
 
 Ihandle* message_field;
 Ihandle* chat_history;
